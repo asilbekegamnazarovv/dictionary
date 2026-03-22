@@ -128,3 +128,9 @@
     @apply font-sans;
   }
 }
+
+@layer components {
+  .cntr {
+    @apply max-w-4xl mx-auto;
+  }
+}

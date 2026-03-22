@@ -1,15 +1,55 @@
 import type { Metadata } from "next";
-import { Inter, Poppins, Geist } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Script from "next/script";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  weight: ["400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"],
+export const myFont = localFont({
+  src: [
+    {
+      path: "../public/Google_Sans/static/GoogleSans-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/Google_Sans/static/GoogleSans-Italic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../public/Google_Sans/static/GoogleSans-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/Google_Sans/static/GoogleSans-MediumItalic.ttf",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "../public/Google_Sans/static/GoogleSans-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/Google_Sans/static/GoogleSans-BoldItalic.ttf",
+      weight: "700",
+      style: "italic",
+    },
+    {
+      path: "../public/Google_Sans/static/GoogleSans-SemiBold.ttf",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../public/Google_Sans/static/GoogleSans-SemiBoldItalic.ttf",
+      weight: "800",
+      style: "italic",
+    },
+  ],
+  variable: "--font-myFont",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -21,11 +61,11 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   title: {
-    default: "My-dictionary - Inglizcha so'zlarni o'rganish",
-    template: "%s | My dictionary",
+    default: "Dictionary - Inglizcha so'zlarni o'rganish",
+    template: "%s | Dictionary",
   },
   description:
-    "My Dictionary - inglizcha so'zlarni oson yodlash, tarjima, misollar va talaffuz bilan o'rganish platformasi.",
+    "Dictionary - inglizcha so'zlarni oson yodlash, tarjima, misollar va talaffuz bilan o'rganish platformasi.",
   keywords: [
     "ingliz-tili",
     "english words",
@@ -36,14 +76,14 @@ export const metadata: Metadata = {
     "so‘zlar ma’nosi",
     "online dictionary",
   ],
-  authors: [{ name: "My Dictionary" }],
-  creator: "My Dictionary",
+  authors: [{ name: "Dictionary" }],
+  creator: "Dictionary",
   openGraph: {
-    title: "My Dictionary",
+    title: "Dictionary",
     description:
       "Ingliz tilidagi so'zlarni tarjimasi, misol va talaffuzi bilan o'rganing.",
     url: "https://dictionary.vercel.app",
-    siteName: "My Dictionary",
+    siteName: "Dictionary",
     locale: "uz_UZ",
     type: "website",
   },
@@ -61,11 +101,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", poppins.variable, "font-sans", geist.variable)}
+      className={cn("h-full", "antialiased", myFont.className, "font-sans")}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         <Script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
