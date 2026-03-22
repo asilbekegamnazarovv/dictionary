@@ -131,6 +131,6 @@
 
 @layer components {
   .cntr {
-    @apply max-w-4xl mx-auto;
+    @apply max-w-3xl mx-auto;
   }
 }

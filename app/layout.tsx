@@ -53,7 +53,7 @@ export const myFont = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://my.uz"),
+  metadataBase: new URL("https://dictionary.render.com"),
   manifest: "/minefest.json",
   icons: {
     icon: "/favicon.ico",
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     title: "Dictionary",
     description:
       "Ingliz tilidagi so'zlarni tarjimasi, misol va talaffuzi bilan o'rganing.",
-    url: "https://dictionary.vercel.app",
+    url: "https://dictionary.render.com",
     siteName: "Dictionary",
     locale: "uz_UZ",
     type: "website",
