@@ -5,20 +5,27 @@ import Link from "next/link";
 import logo from "@/components/logo.png";
 import { ThemeToggle } from "./theme-toggle";
 import { usePathname } from "next/navigation";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
-import { Search } from "lucide-react";
-import { Kbd } from "./ui/kbd";
+import Shortcuts from "./shortcuts";
+import { BookOpenText, Home, Languages } from "lucide-react";
 
 const Navbar = () => {
   const pathname = usePathname();
 
   const links = [
     { id: 1, name: "Home", href: "/" },
-    { id: 5, name: "Words", href: "/words" },
+    { id: 2, name: "Words", href: "/words" },
+    { id: 3, name: "Translate", href: "/translate" },
   ];
+
+  const mediaNavLinks = [
+    { id: 1, icon: <Home />, href: "/" },
+    { id: 2, icon: <BookOpenText />, href: "/words" },
+    { id: 3, icon: <Languages />, href: "/translate" },
+  ];
+
   return (
     <header>
-      <nav className="cntr mt-5 flex items-center justify-between border p-2 rounded-full backdrop-blur-lg bg-gray-400/10 border-gray-400/20 dark:bg-gray-600/10 dark:border-gray-500/20">
+      <nav className="cntr mt-5 hidden md:flex items-center justify-between border p-2 rounded-full backdrop-blur-lg bg-gray-400/10 border-gray-400/20 dark:bg-gray-600/10 dark:border-gray-500/20">
         <div className="flex items-center gap-5">
           <Link
             href={"/"}
@@ -26,15 +33,7 @@ const Navbar = () => {
           >
             <Image src={logo} loading="eager" alt="this is a picture" />
           </Link>
-          <InputGroup className="h-9 bg-transparent">
-            <InputGroupInput placeholder="Search..." />
-            <InputGroupAddon>
-              <Search />
-            </InputGroupAddon>
-            <InputGroupAddon align={"inline-end"}>
-              <Kbd>CTRL + K</Kbd>
-            </InputGroupAddon>
-          </InputGroup>
+          <Shortcuts />
         </div>
         <div className="flex items-center gap-5">
           <ul className="flex items-center gap-2.5">
@@ -62,6 +61,22 @@ const Navbar = () => {
           <ThemeToggle />
         </div>
       </nav>
+      <div className="fixed right-0 bottom-0 left-0 flex md:hidden h-15 bg-olive-400 dark:bg-zinc-900 rounded-t-xl items-center justify-between px-10">
+        {mediaNavLinks.map((item) => {
+          const { href, icon, id } = item;
+          const isActive = pathname === href;
+          return (
+            <div key={id}>
+              <Link
+                href={href}
+                className={`py-0.5 ${isActive ? "text-[#209CEE]" : "text-gray-800 dark:text-gray-300"} bg-white w-full h-full rounded-full`}
+              >
+                {icon}
+              </Link>
+            </div>
+          );
+        })}
+      </div>
     </header>
   );
 };
